@@ -1,0 +1,4 @@
+:: Set primary and secondary dns servers
+netsh interface ipv4 add dns "Ethernet0" address=x.x.x.x index=1
+netsh interface ipv4 add dns "Ethernet0" address=y.y.y.y index=2
+
