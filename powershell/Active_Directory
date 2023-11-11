@@ -1,0 +1,12 @@
+######## Recent computers that joined domain ( last 30 days )
+$ joined = [DateTime]::Today.AddDays(-30)
+Get-ADComputer -Filter 'WhenCreated -ge $joined ' -Properties whencreated | format-table Name,Whencreated,distinguishedname -Autosize -Wqrp
+
+######## List Users/Computers of OU
+Get-ADUser -Filter * -SearchBase 'OU=...,dc=...,dc=...' -Properties *
+Get-ADComputer -Filter * -SearchBase 'OU=...,dc=...,dc=...' -Properties *
+
+######## Add DNS record from .csv file
+Import-CSV .\dns.csv | foreach { Add-DnsServerResourceRecordA -Name $_.name  -IPv4Address  $_.ip_add  -ZoneName contoso.local -CreatePtr
+
+
