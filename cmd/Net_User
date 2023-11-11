@@ -1,0 +1,11 @@
+:: Create a User with a password anc description
+net user /add /comment:"THis is a comment" [User_Name] [Password]
+
+:: Disable User
+net user [User_Name] /active:no
+
+:: remove / add user from / to a group
+net localgroup [Group_Name] [User_Name] /[delete or addd]
+
+:: Password Never Expire
+WMIC USERACCOUNT WHERE Name="[User_Name]" SET PasswordExpires=FALSE
