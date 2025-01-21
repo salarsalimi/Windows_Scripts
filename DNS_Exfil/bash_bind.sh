@@ -10,17 +10,19 @@ fi
 start_hex="$1"
 end_hex="$2"
 
-# Get the current date in YYYY-MM-DD format (you can customize this as needed)
-current_date=$(date +"%Y-%m-%d")
+# Get the current date and time in YYYY-MM-DD_HH-MM-SS format
+current_datetime=$(date +"%Y-%m-%d_%H-%M-%S")
 
-# Define the output file name with the date
-output_file="file_$current_date"
+# Define the output file name with the date and time
+output_file="file_$current_datetime"
 
 # Run the modified command with arguments
 cat /var/named/log/queries | \
-grep -oP "(?<=query: )[0-9A-Fa-f]+(?=\.)" | \
+grep -oP "(?<=query: )[0-9A-Fa-f_-]+(?=\.)" | \
 grep -iA 1000 "$start_hex" | \
 grep -iB 1000 "$end_hex" | \
+grep -iv "$start_hex" | \
+grep -iv "$end_hex" | \
 tr '[:upper:]' '[:lower:]' | \
 uniq | \
 tr -d '\n' | \
