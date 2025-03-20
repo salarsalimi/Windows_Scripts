@@ -1,1 +1,1 @@
-Get-LocalGroupMember Administrators | Out-File -Path "C:\Users\Administrator\Desktop\test.txt"
+Get-LocalGroupMember Administrators | Out-File -Path C:\Users\Administrator\Desktop\test.txt
